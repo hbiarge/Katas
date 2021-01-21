@@ -12,16 +12,19 @@ namespace MarsRover.Tests
         {
             var planet = new Planet(maxX: 10, maxY: 10);
             planet.AddObstacle(new Point(2, 2));
+            planet.AddObstacle(new Point(2, 1));
             _sut = new Rover();
             _sut.Land(planet);
         }
 
-        [Fact]
-        public void RoverReportOneObstacle()
+        [Theory]
+        [InlineData("ffrfff", "(1,2,E) (2,2)")]
+        [InlineData("ffrfffrflf", "(1,1,E) (2,2) (2,1)")]
+        public void RoverReportObstacles(string command, string expectedResult)
         {
-            var result = _sut.Command("ffrfff");
+            var result = _sut.Command(command);
 
-            result.Should().Be("(1,2,E) (2,2)");
+            result.Should().Be(expectedResult);
         }
     }
 }
