@@ -9,8 +9,9 @@ namespace MarsRover.Tests
 
         public RoverTests()
         {
+            var planet = new Planet(maxX: 10, maxY: 10);
             _sut = new Rover();
-            _sut.Land(new Planet(maxX: 100, maxY: 100));
+            _sut.Land(planet);
         }
 
         [Fact]
@@ -33,7 +34,7 @@ namespace MarsRover.Tests
 
         [Theory]
         [InlineData(Rover.Commands.MoveForward, "0,1,N")]
-        [InlineData(Rover.Commands.MoveBackward, "0,99,N")]
+        [InlineData(Rover.Commands.MoveBackward, "0,9,N")]
         public void RoverMoves_ChangePosition(string command, string expectedResult)
         {
             var result = _sut.Command(command);
@@ -45,7 +46,7 @@ namespace MarsRover.Tests
         [InlineData("ffrff", "2,2,E")]
         [InlineData("ffbfbfbfb", "0,1,N")]
         [InlineData("ffrrff", "0,0,S")]
-        [InlineData("bbllffrrff", "0,98,N")]
+        [InlineData("bbllffrrff", "0,8,N")]
         public void RoverCombinedCommands_ChangePosition(string command, string expectedResult)
         {
             var result = _sut.Command(command);
