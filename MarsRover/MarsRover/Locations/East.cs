@@ -54,7 +54,7 @@ namespace MarsRover.Locations
             {
                 // Wraps over the world
                 candidateCoordinate = new Point(
-                    x: 0,
+                    x: planet.MaxX,
                     y: currentCoordinates.Y);
             }
 

@@ -34,27 +34,26 @@ namespace MarsRover
 
             foreach (var command in commands)
             {
-                if (_commandsLookup.TryGetValue(command, out var func))
+                if (!_commandsLookup.TryGetValue(command, out var func))
                 {
-                    var result = func(_currentLocation, _planet);
+                    continue;
+                }
 
-                    if (result.IsSuccess)
-                    {
-                        _currentLocation = result.Location;
-                    }
-                    else
-                    {
-                        _obstaclesFound.Add(result.Obstacle);
-                    }
+                var result = func(_currentLocation, _planet);
+
+                if (result.IsSuccess)
+                {
+                    _currentLocation = result.Location;
+                }
+                else
+                {
+                    _obstaclesFound.Add(result.Obstacle);
                 }
             }
 
-            if (_obstaclesFound.Count > 0)
-            {
-                return $"{_currentLocation} {string.Join(" ", _obstaclesFound)}";
-            }
-
-            return _currentLocation.ToString();
+            return _obstaclesFound.Count > 0
+                ? $"{_currentLocation} {string.Join(" ", _obstaclesFound)}"
+                : _currentLocation.ToString();
         }
 
         public static class Commands

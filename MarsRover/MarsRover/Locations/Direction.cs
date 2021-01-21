@@ -19,7 +19,7 @@ namespace MarsRover.Locations
             return Name;
         }
 
-        protected MovementResult CreateMovementResult(
+        protected static MovementResult CreateMovementResult(
             Planet planet,
             Point candidateCoordinate,
             Direction direction)
