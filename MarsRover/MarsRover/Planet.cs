@@ -33,5 +33,10 @@ namespace MarsRover
 
             _obstacles.Add(coordinate);
         }
+
+        public bool HasObstacleAtCoordinate(Point coordinate)
+        {
+            return _obstacles.Contains(coordinate);
+        }
     }
 }

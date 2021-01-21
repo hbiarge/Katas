@@ -16,42 +16,52 @@ namespace MarsRover.Locations
             return new Location(currentCoordinates, new East());
         }
 
-        public override Location TryMoveForward(Planet planet, Point currentCoordinates)
+        public override MovementResult TryMoveForward(Planet planet, Point currentCoordinates)
         {
+            Point candidateCoordinate;
+
             if (currentCoordinates.Y > 0)
             {
-                return new Location(
-                    new Point(
-                        x: currentCoordinates.X,
-                        y: currentCoordinates.Y - 1),
-                    new South());
+                candidateCoordinate = new Point(
+                    x: currentCoordinates.X,
+                    y: currentCoordinates.Y - 1);
+            }
+            else
+            {
+                // Wraps over the world
+                candidateCoordinate = new Point(
+                    x: currentCoordinates.X,
+                    y: planet.MaxY);
             }
 
-            // Wraps over the world
-            return new Location(
-                new Point(
-                    x: currentCoordinates.X,
-                    y: planet.MaxY),
-                new South());
+            return CreateMovementResult(
+                planet: planet,
+                candidateCoordinate: candidateCoordinate,
+                direction: new South());
         }
 
-        public override Location TryMoveBackward(Planet planet, Point currentCoordinates)
+        public override MovementResult TryMoveBackward(Planet planet, Point currentCoordinates)
         {
+            Point candidateCoordinate;
+
             if (currentCoordinates.Y < planet.MaxY)
             {
-                return new Location(
-                    new Point(
-                        x: currentCoordinates.X,
-                        y: currentCoordinates.Y + 1),
-                    new South());
+                candidateCoordinate = new Point(
+                    x: currentCoordinates.X,
+                    y: currentCoordinates.Y + 1);
+            }
+            else
+            {
+                // Wraps over the world
+                candidateCoordinate = new Point(
+                    x: currentCoordinates.X,
+                    y: 0);
             }
 
-            // Wraps over the world
-            return new Location(
-                new Point(
-                    x: currentCoordinates.X,
-                    y: 0),
-                new South());
+            return CreateMovementResult(
+                planet: planet,
+                candidateCoordinate: candidateCoordinate,
+                direction: new South());
         }
     }
 }

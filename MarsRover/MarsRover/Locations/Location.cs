@@ -13,29 +13,29 @@ namespace MarsRover.Locations
             _direction = direction;
         }
 
-        public Location TurnLeft()
+        public MovementResult TurnLeft()
         {
-            return _direction.TurnLeft(_coordinates);
+            return MovementResult.Success(_direction.TurnLeft(_coordinates));
         }
 
-        public Location TurnRight()
+        public MovementResult TurnRight()
         {
-            return _direction.TurnRight(_coordinates);
+            return MovementResult.Success(_direction.TurnRight(_coordinates));
         }
 
-        public Location TryMoveForward(Planet planet)
+        public MovementResult TryMoveForward(Planet planet)
         {
             return _direction.TryMoveForward(planet, _coordinates);
         }
 
-        public Location TryMoveBackward(Planet planet)
+        public MovementResult TryMoveBackward(Planet planet)
         {
             return _direction.TryMoveBackward(planet, _coordinates);
         }
 
         public override string ToString()
         {
-            return $"{_coordinates.X},{_coordinates.Y},{_direction}";
+            return $"({_coordinates.X},{_coordinates.Y},{_direction})";
         }
 
         public static Location Default()
