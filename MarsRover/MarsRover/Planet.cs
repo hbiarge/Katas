@@ -2,14 +2,14 @@
 {
     public class Planet
     {
-        public Planet(int x, int y)
+        public Planet(int maxX, int maxY)
         {
-            X = x;
-            Y = y;
+            MaxX = maxX - 1;
+            MaxY = maxY - 1;
         }
 
-        public int X { get; }
+        public int MaxX { get; }
 
-        public int Y { get; }
+        public int MaxY { get; }
     }
 }

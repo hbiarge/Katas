@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace MarsRover
+namespace MarsRover.Locations
 {
     public class Location
     {

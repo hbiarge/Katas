@@ -1,10 +1,10 @@
 ﻿using System.Drawing;
 
-namespace MarsRover
+namespace MarsRover.Locations
 {
     public abstract class Direction
     {
-        public abstract string Name { get; }
+        protected abstract string Name { get; }
 
         public abstract Location TurnRight(Point currentCoordinates);
 

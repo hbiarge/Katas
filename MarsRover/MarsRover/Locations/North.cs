@@ -1,10 +1,10 @@
 ﻿using System.Drawing;
 
-namespace MarsRover
+namespace MarsRover.Locations
 {
     public class North : Direction
     {
-        public override string Name => "N";
+        protected override string Name => "N";
 
         public override Location TurnRight(Point currentCoordinates)
         {
@@ -18,15 +18,20 @@ namespace MarsRover
 
         public override Location TryMoveForward(Planet planet, Point currentCoordinates)
         {
-            if (currentCoordinates.Y < planet.Y)
+            if (currentCoordinates.Y < planet.MaxY)
             {
                 return new Location(
-                    new Point(currentCoordinates.X, currentCoordinates.Y + 1),
+                    new Point(
+                        x: currentCoordinates.X,
+                        y: currentCoordinates.Y + 1),
                     new North());
             }
 
+            // Wraps over the world
             return new Location(
-                new Point(currentCoordinates.X, currentCoordinates.Y),
+                new Point(
+                    x: currentCoordinates.X,
+                    y: 0),
                 new North());
         }
 
@@ -35,12 +40,15 @@ namespace MarsRover
             if (currentCoordinates.Y > 0)
             {
                 return new Location(
-                    new Point(currentCoordinates.X, currentCoordinates.Y - 1),
+                    new Point(
+                        x: currentCoordinates.X, 
+                        y: currentCoordinates.Y - 1),
                     new North());
             }
 
+            // Wraps over the world
             return new Location(
-                new Point(currentCoordinates.X, currentCoordinates.Y),
+                new Point(currentCoordinates.X, planet.MaxY),
                 new North());
         }
     }

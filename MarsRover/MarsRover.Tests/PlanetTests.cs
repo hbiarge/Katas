@@ -8,10 +8,10 @@ namespace MarsRover.Tests
         [Fact]
         public void Planet_ShouldHaveDimensions()
         {
-            var sut = new Planet(x: 100, y: 100);
+            var sut = new Planet(maxX: 100, maxY: 100);
 
-            sut.X.Should().Be(100);
-            sut.Y.Should().Be(100);
+            sut.MaxX.Should().Be(99);
+            sut.MaxY.Should().Be(99);
         }
     }
 }
