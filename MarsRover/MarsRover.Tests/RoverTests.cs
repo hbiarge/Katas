@@ -5,15 +5,32 @@ namespace MarsRover.Tests
 {
     public class RoverTests
     {
+        private readonly Planet _planet;
+        private readonly Rover _sut;
+
+        public RoverTests()
+        {
+            _planet = new Planet(x: 100, y: 100);
+            _sut = new Rover();
+            _sut.Land(_planet);
+        }
+
         [Fact]
         public void RoverLands_InDefaultPosition()
         {
-            var sut = new Rover();
-            sut.Land(new Planet(x: 100, y: 100));
-
-            var result = sut.Command(string.Empty);
+            var result = _sut.Command(Rover.Commands.Default);
 
             result.Should().Be("0,0,N");
+        }
+
+        [Theory]
+        [InlineData(Rover.Commands.TurnLeft, "0,0,W")]
+        [InlineData(Rover.Commands.TurnRight, "0,0,E")]
+        public void RoverTurns_ChangeDirection(string command, string expectedResult)
+        {
+            var result = _sut.Command(command);
+
+            result.Should().Be(expectedResult);
         }
     }
 }
