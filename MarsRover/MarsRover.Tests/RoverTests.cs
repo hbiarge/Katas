@@ -32,5 +32,15 @@ namespace MarsRover.Tests
 
             result.Should().Be(expectedResult);
         }
+
+        [Theory]
+        [InlineData(Rover.Commands.MoveForward, "0,1,N")]
+        [InlineData(Rover.Commands.MoveBackward, "0,0,N")]
+        public void RoverMoves_ChangePosition(string command, string expectedResult)
+        {
+            var result = _sut.Command(command);
+
+            result.Should().Be(expectedResult);
+        }
     }
 }

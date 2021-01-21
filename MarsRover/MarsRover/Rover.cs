@@ -27,6 +27,16 @@ namespace MarsRover
                 _currentLocation = _currentLocation.TurnRight();
             }
 
+            if (parameter == Commands.MoveForward)
+            {
+                _currentLocation = _currentLocation.TryMoveForward(_planet);
+            }
+
+            if (parameter == Commands.MoveBackward)
+            {
+                _currentLocation = _currentLocation.TryMoveBackward(_planet);
+            }
+
             return _currentLocation.ToString();
         }
 
@@ -35,6 +45,8 @@ namespace MarsRover
             public const string Default = "";
             public const string TurnLeft = "l";
             public const string TurnRight = "r";
+            public const string MoveForward = "f";
+            public const string MoveBackward = "b";
         }
     }
 }
