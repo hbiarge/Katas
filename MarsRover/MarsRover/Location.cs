@@ -37,5 +37,12 @@ namespace MarsRover
         {
             return $"{_coordinates.X},{_coordinates.Y},{_direction}";
         }
+
+        public static Location Default()
+        {
+            return new Location(
+                coordinates: new Point(x: 0, y: 0),
+                direction: new North());
+        }
     }
 }
